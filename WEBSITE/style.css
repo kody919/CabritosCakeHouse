@@ -47,13 +47,32 @@ nav a{
   justify-content:center;
   align-items:center;
   text-align:center;
+  
+  background-image: url("ube.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 }
 .hero h1{
   font-size:56px;
+  color: white;
 }
 footer{
   text-align:center;
   padding:18px;
   background:#D98C8C;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.logo img{
+    width:55px;
+    height:55px;
 }
