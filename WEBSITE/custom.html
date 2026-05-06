@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Custom Cake | Cabrito's Cake House</title>
+<link rel="stylesheet" href="order.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <img src="CABRITOSCAKEHOUSE2.png">
+        <span>Cabrito's Cake House</span>
+    </div>
+
+    <nav>
+        <a href="ordercake.html">Order</a>
+        <a href="purchis.html">Purchase History</a>
+        <a href="user.html" class="btn btn-dark">My Profile</a>
+        <a href="index.html" class="btn btn-dark">Log Out</a>
+    </nav>
+</header>
+
+<div class="order-container">
+
+    <div class="category-buttons">
+        <a href="ordercake.html">Cakes</a>
+        <a href="orderdrinks.html">Drinks</a>
+        <a href="custom.html">Custom</a>
+    </div>
+
+    <h1 class="page-title">Custom</h1>
+
+    <div class="custom-box">
+        <h2>Customize your cake!</h2>
+
+        <div class="form-row">
+
+            <!-- SIZE (FIXED) -->
+            <div class="form-group">
+                <label>Size:</label>
+
+                <div class="size-options">
+                    <label><input type="radio" name="size" value="Small" checked> Small (₱500)</label>
+                    <label><input type="radio" name="size" value="Medium"> Medium (₱1000)</label>
+                    <label><input type="radio" name="size" value="Large"> Large (₱2000)</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Theme:</label>
+                <input type="text" id="theme" placeholder="e.g. Birthday, Wedding">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Flavor:</label>
+                <input type="text" id="flavor" placeholder="e.g. Chocolate, Vanilla">
+            </div>
+
+            <div class="form-group">
+                <label>Add-ons:</label>
+                <input type="text" id="addons" placeholder="e.g. Candles, Topper">
+            </div>
+        </div>
+
+        <div class="form-group full">
+            <label>Message:</label>
+            <input type="text" id="message" placeholder="Write your message here">
+        </div>
+
+        <div class="form-group full">
+            <label>Additional Instructions:</label>
+            <textarea id="instructions" rows="3" placeholder="Extra details..."></textarea>
+        </div>
+
+        <div class="custom-buttons">
+            <button class="btn btn-dark" onclick="addCustomToCart()">Add to Order</button>
+            <a href="#" class="btn btn-dark">Contact us for more info!</a>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <img src="CABRITOSCAKEHOUSE2.png">
+    <p>© 2020 Cabrito's Cake House. All Rights Reserved.</p>
+</footer>
+
+<script>
+function addCustomToCart(){
+
+    const size = document.querySelector('input[name="size"]:checked').value;
+    const theme = document.getElementById("theme").value;
+    const flavor = document.getElementById("flavor").value;
+    const addons = document.getElementById("addons").value;
+    const message = document.getElementById("message").value;
+    const instructions = document.getElementById("instructions").value;
+
+    // PRICE SYSTEM
+    let price = 0;
+
+    if(size === "Small") price = 500;
+    else if(size === "Medium") price = 1000;
+    else if(size === "Large") price = 2000;
+
+    let productName = "Custom Cake (" + size + ")";
+
+    if(theme || flavor){
+        productName += ` - ${theme || "Any Theme"}, ${flavor || "Any Flavor"}`;
+    }
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || {};
+
+    if(cart[productName]){
+        cart[productName].quantity++;
+    } else {
+        cart[productName] = {
+            price: price,
+            quantity: 1,
+            details: {
+                size,
+                theme,
+                flavor,
+                addons,
+                message,
+                instructions
+            }
+        };
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    alert("Custom cake added to order!");
+    window.location.href = "ordercake.html";
+}
+</script>
+
+</body>
+</html>

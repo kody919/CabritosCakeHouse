@@ -1,0 +1,35 @@
+/* ADMIN PAGE ONLY */
+
+/* Override or complement main styles if needed */
+.admin-hero{
+height:80vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
+
+.admin-content h1{
+font-size:60px;
+margin-bottom:10px;
+color:#000;
+}
+
+.admin-content p{
+font-size:20px;
+margin-bottom:25px;
+color:#444;
+}
+
+.admin-content .actions{
+display:flex;
+gap:15px;
+justify-content:center;
+flex-wrap:wrap;
+}
+
+/* Optional: make buttons slightly bigger for admin */
+.admin-content .btn{
+padding:12px 22px;
+font-size:15px;
+}

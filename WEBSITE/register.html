@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register | Cabrito's Cake House</title>
+
+<link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <img src="CABRITOSCAKEHOUSE2.png" alt="Logo">
+        <span>Cabrito's Cake House</span>
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="menu.html">Menu</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="login.html" class="btn btn-dark">Log in</a>
+    </nav>
+</header>
+<section class="login-page">
+
+<div class="login-box">
+
+<h2>Create Account</h2>
+
+<form onsubmit="registerUser(event)">
+
+    <input type="text" id="name" placeholder="Full Name" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <input type="text" id="address" placeholder="Address" required>
+
+    <button type="submit" class="btn btn-dark login-btn">
+        Register
+    </button>
+
+    <p>
+        Already have an account?
+        <a href="login.html">Log in</a>
+    </p>
+
+</form>
+
+</div>
+
+</section>
+
+<footer>
+    <img src="CABRITOSCAKEHOUSE2.png">
+    <p>© 2020 Cabrito's Cake House. All Rights Reserved.</p>
+</footer>
+
+<script>
+
+function safeKey(email) {
+    return "data_" + email.replace(/[@.]/g, "_");
+}
+
+/* REGISTER USER */
+function registerUser(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const address = document.getElementById("address").value.trim();
+
+    const key = safeKey(email);
+
+    if (localStorage.getItem(key)) {
+        alert("Account already exists!");
+        return;
+    }
+
+    const userData = {
+        name: name,
+        password: password,
+        address: address
+    };
+
+    localStorage.setItem(key, JSON.stringify(userData));
+
+    localStorage.setItem("loggedInUser", email);
+
+    alert("Account created successfully!");
+
+    window.location.href = "user.html";
+}
+
+</script>
+
+</body>
+</html>

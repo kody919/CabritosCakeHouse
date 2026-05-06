@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Management | Cabrito's Cake House</title>
+
+<link rel="stylesheet" href="prodman.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <img src="CABRITOSCAKEHOUSE2.png" alt="Logo">
+        <span>Cabrito's Cake House</span>
+    </div>
+
+    <nav>
+        <a href="userman.html">User Management</a>
+        <a href="prodman.html">Product Management</a>
+        <a href="login.html" class="btn btn-dark">Log Out</a>
+    </nav>
+</header>
+
+<main>
+
+<section class="product-management">
+
+    <div class="top-bar">
+        <h1>Product Management</h1>
+        <button class="btn btn-light">Add Product</button>
+    </div>
+
+    <div class="product-grid">
+
+        <div class="product-card">
+            <div class="product-img">
+                <img src="coffee1.webp">
+            </div>
+            <div class="product-info">
+                <h3>Coffee Cake</h3>
+                <p>₱350.00</p>
+                <div class="actions">
+                    <button class="status active">Available</button>
+                    <button class="btn btn-light">Edit</button>
+                    <button class="btn btn-dark">Remove</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-img">
+                <img src="cake.jpeg">
+            </div>
+            <div class="product-info">
+                <h3>Strawberry Cake</h3>
+                <p>₱300.00</p>
+                <div class="actions">
+                    <button class="status active">Available</button>
+                    <button class="btn btn-light">Edit</button>
+                    <button class="btn btn-dark">Remove</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-img">
+                <img src="cnc.jpg">
+            </div>
+            <div class="product-info">
+                <h3>Cookies n Cream Cake</h3>
+                <p>₱500.00</p>
+                <div class="actions">
+                    <button class="status active">Available</button>
+                    <button class="btn btn-light">Edit</button>
+                    <button class="btn btn-dark">Remove</button>
+                </div>
+            </div>
+        </div>
+		
+		        <div class="product-card">
+            <div class="product-img">
+                <img src="mangograham.jpg">
+            </div>
+            <div class="product-info">
+                <h3>Mango Graham Cake</h3>
+                <p>₱250.00</p>
+                <div class="actions">
+                    <button class="status active">Available</button>
+                    <button class="btn btn-light">Edit</button>
+                    <button class="btn btn-dark">Remove</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-img">
+                <img src="ube.webp">
+            </div>
+            <div class="product-info">
+                <h3>Ube Cake</h3>
+                <p>₱350.00</p>
+                <div class="actions">
+                    <button class="status active">Available</button>
+                    <button class="btn btn-light">Edit</button>
+                    <button class="btn btn-dark">Remove</button>
+                </div>
+            </div>
+        </div>
+		
+        <div class="product-card">
+            <div class="product-img">
+                <img src="customized2.jpg">
+            </div>
+            <div class="product-info">
+                <h3>Custom Cake</h3>
+                <p>S-₱350.00 | M-₱1,000 | L-₱2,000</p>
+                <div class="actions">
+                    <button class="status active">Available</button>
+                    <button class="btn btn-light">Edit</button>
+                    <button class="btn btn-dark">Remove</button>
+                </div>
+            </div>
+        </div>
+		
+        <div class="product-card">
+            <div class="product-img">
+                <img src="cake2.avif">
+            </div>
+            <div class="product-info">
+                <h3>Sliced Choco Cake</h3>
+                <p>₱120.00</p>
+                <div class="actions">
+                    <button class="status inactive">Unavailable</button>
+                    <button class="btn btn-light">Edit</button>
+                    <button class="btn btn-dark">Remove</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+<footer>
+    <img src="CABRITOSCAKEHOUSE2.png">
+    <p>© 2020 Cabrito's Cake House. All Rights Reserved.</p>
+</footer>
+
+<script>
+document.querySelectorAll(".status").forEach(btn => {
+    btn.addEventListener("click", () => {
+        if (btn.classList.contains("active")) {
+            btn.classList.remove("active");
+            btn.classList.add("inactive");
+            btn.textContent = "Unavailable";
+        } else {
+            btn.classList.remove("inactive");
+            btn.classList.add("active");
+            btn.textContent = "Available";
+        }
+    });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Profile | Cabrito's Cake House</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="user.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <img src="CABRITOSCAKEHOUSE2.png" alt="Logo">
+        <span>Cabrito's Cake House</span>
+    </div>
+
+    <nav>
+        <a href="ordercake.html">Order</a>
+        <a href="purchis.html">Purchase History</a>
+        <a href="user.html" class="btn btn-dark">My Profile</a>
+        <a href="index.html" class="btn btn-dark">Log Out</a>
+    </nav>
+</header>
+
+<section class="user-section">
+
+    <div class="user-left">
+        <h1 id="welcomeText">Welcome, User!</h1>
+        <p>Manage your account</p>
+    </div>
+
+    <div class="profile-card">
+
+        <h2>Personal Information</h2>
+
+        <!-- PROFILE IMAGE -->
+        <div class="profile-pic">
+
+            <label for="fileInput">
+                <img id="profileImage" src="PFP.png" class="circle">
+            </label>
+
+            <div class="pic-actions">
+                <label for="fileInput" class="change-text">Change your profile</label>
+                <small id="removePhoto">Remove Photo</small>
+            </div>
+
+            <input type="file" id="fileInput" accept="image/*" hidden>
+
+        </div>
+
+        <!-- FORM -->
+        <form>
+
+            <div class="input-group">
+                <label>Name</label>
+                <input type="text" id="name">
+            </div>
+
+            <div class="input-group">
+                <label>Address</label>
+                <input type="text" id="address">
+            </div>
+
+            <div class="input-group">
+                <label>Contact Number</label>
+                <input type="text" id="contact">
+            </div>
+
+            <button class="btn btn-dark" type="submit">Save</button>
+
+        </form>
+
+    </div>
+
+</section>
+
+<!-- ================= JS ================= -->
+<script>
+const fileInput = document.getElementById("fileInput");
+const profileImage = document.getElementById("profileImage");
+const removePhoto = document.getElementById("removePhoto");
+const welcomeText = document.getElementById("welcomeText");
+
+const nameInput = document.getElementById("name");
+const addressInput = document.getElementById("address");
+const contactInput = document.getElementById("contact");
+
+/* GET LOGGED IN USER */
+const email = localStorage.getItem("loggedInUser");
+
+if (!email) {
+    alert("No logged in user found!");
+    window.location.href = "login.html";
+}
+
+/* STORAGE KEYS */
+const STORAGE_KEY = "data_" + email;
+const IMAGE_KEY = "img_" + email;
+
+/* LOAD DATA ON PAGE OPEN */
+window.addEventListener("load", function () {
+
+    /* LOAD IMAGE */
+    const img = localStorage.getItem(IMAGE_KEY);
+    profileImage.src = img ? img : "PFP.png";
+
+    /* LOAD PROFILE DATA */
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+
+    nameInput.value = data.name || "";
+    addressInput.value = data.address || "";
+    contactInput.value = data.contact || "";
+
+    welcomeText.textContent = "Welcome, " + (data.name || "User") + "!";
+});
+
+/* SAVE PROFILE */
+document.querySelector("form").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    let data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+
+    data.name = nameInput.value;
+    data.address = addressInput.value;
+    data.contact = contactInput.value;
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+
+    welcomeText.textContent = "Welcome, " + data.name + "!";
+
+    alert("Profile saved successfully!");
+});
+
+/* IMAGE UPLOAD */
+fileInput.addEventListener("change", function () {
+    const file = this.files[0];
+
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            profileImage.src = e.target.result;
+            localStorage.setItem(IMAGE_KEY, e.target.result);
+        };
+
+        reader.readAsDataURL(file);
+    }
+});
+
+/* REMOVE PHOTO */
+removePhoto.addEventListener("click", function () {
+    profileImage.src = "PFP.png";
+    localStorage.setItem(IMAGE_KEY, "PFP.png");
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login | Cabrito's Cake House</title>
+<link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <img src="CABRITOSCAKEHOUSE2.png" alt="Logo">
+        <span>Cabrito's Cake House</span>
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="menu.html">Menu</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="login.html" class="btn btn-dark">Log in</a>
+    </nav>
+</header>
+
+<section class="login-page">
+
+<div class="login-box">
+
+<h2>Log in</h2>
+
+<form onsubmit="loginUser(event)">
+
+    <input type="email" id="email" placeholder="Email.." required>
+    <input type="password" id="password" placeholder="Password.." required>
+
+    <div class="forgot">
+        <a href="forgot.html">Forgot Password?</a>
+    </div>
+
+    <button type="submit" class="btn btn-dark login-btn">
+        Login
+    </button>
+
+    <p class="register-text">
+        Don’t have an account?
+        <a href="register.html">Register</a>
+    </p>
+
+</form>
+
+</div>
+
+</section>
+
+<footer>
+    <img src="CABRITOSCAKEHOUSE2.png">
+    <p>© 2020 Cabrito's Cake House. All Rights Reserved.</p>
+</footer>
+
+<script>
+
+/* ===============================
+   SAFE KEY FUNCTION
+================================ */
+function safeKey(email) {
+    return "data_" + email.replace(/[@.]/g, "_");
+}
+
+/* ===============================
+   CREATE DEMO ACCOUNTS
+================================ */
+function createDemoAccounts() {
+
+    const users = [
+        { email: "adminkody@gmail.com", password: "cosay", role: "admin" },
+        { email: "zitow919@gmail.com", password: "triple34", role: "user" },
+        { email: "valenzuelatwothree@gmail.com", password: "valenzuelacityfilchi", role: "user" }
+    ];
+
+    users.forEach(u => {
+
+        const key = safeKey(u.email);
+
+        // Prevent overwriting if already exists
+        if (!localStorage.getItem(key)) {
+            localStorage.setItem(key, JSON.stringify({
+                name: u.email.split("@")[0],
+                password: u.password,
+                role: u.role,
+                address: "",
+                contact: ""
+            }));
+        }
+
+    });
+}
+
+/* RUN DEMO CREATION */
+createDemoAccounts();
+
+/* ===============================
+   LOGIN FUNCTION
+================================ */
+function loginUser(event) {
+    event.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    const key = safeKey(email);
+    const user = JSON.parse(localStorage.getItem(key));
+
+    if (user && user.password === password) {
+
+        localStorage.setItem("loggedInUser", email);
+
+        // ROLE-BASED REDIRECT
+        if (user.role === "admin") {
+            window.location.href = "admin.html";
+        } else {
+            window.location.href = "ordercake.html";
+        }
+
+    } else {
+        alert("Invalid email or password");
+    }
+}
+
+</script>
+
+</body>
+</html>

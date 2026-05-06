@@ -1,0 +1,151 @@
+/* RESET */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+/* BODY */
+body{
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+background:linear-gradient(to right,#ED4264,#FFEDBC);
+color:#222;
+}
+
+/* ===================== */
+/* HEADER (MATCH ORDERCAKE) */
+/* ===================== */
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 40px;
+background:#DC9B9B;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+font-size:24px;
+font-weight:bold;
+}
+
+.logo img{
+width:50px;
+height:50px;
+}
+
+nav{
+display:flex;
+align-items:center;
+gap:18px;
+}
+
+nav a{
+text-decoration:none;
+color:#222;
+font-size:15px;
+}
+
+nav a:hover{
+color:white;
+}
+
+/* BUTTONS (MATCH ORDERCAKE EXACTLY) */
+.btn{
+padding:10px 18px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+text-decoration:none;
+display:inline-block;
+font-weight:bold;
+transition:0.3s;
+}
+
+.btn:hover{
+transform:scale(1.05);
+opacity:0.9;
+}
+
+.btn-dark{
+background:#ED4264;
+color:white;
+}
+
+/* ===================== */
+/* PAGE CONTENT */
+/* ===================== */
+.container{
+flex:1;
+padding:40px 60px;
+}
+
+.title{
+font-size:40px;
+margin-bottom:20px;
+}
+
+/* EMPTY STATE */
+.empty{
+background:white;
+padding:20px;
+border-radius:12px;
+text-align:center;
+font-size:18px;
+}
+
+/* CARD */
+.card{
+background:white;
+padding:18px;
+border-radius:12px;
+margin-bottom:20px;
+box-shadow:0 6px 15px rgba(0,0,0,0.1);
+}
+
+.card-header p{
+margin:5px 0;
+}
+
+.items{
+margin-left:20px;
+margin-top:10px;
+}
+
+.card-total{
+margin-top:12px;
+font-size:18px;
+}
+
+/* ITEM ROW (receipt style) */
+.item-row{
+display:flex;
+justify-content:space-between;
+padding:5px 0;
+border-bottom:1px solid #eee;
+font-size:14px;
+}
+
+
+/* FOOTER (STICKY) */
+footer{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:10px;
+padding:15px;
+background:#DC9B9B;
+font-size:15px;
+margin-top:auto;
+width:100%;
+}
+
+footer img{
+width:40px;
+height:auto;
+}

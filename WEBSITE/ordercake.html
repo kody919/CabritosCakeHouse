@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order | Cabrito's Cake House</title>
+<link rel="stylesheet" href="order.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <img src="CABRITOSCAKEHOUSE2.png">
+        <span>Cabrito's Cake House</span>
+    </div>
+
+    <nav>
+        <a href="ordercake.html">Order</a>
+        <a href="purchis.html">Purchase History</a>
+        <a href="user.html" class="btn btn-dark">My Profile</a>
+        <a href="index.html" class="btn btn-dark">Log Out</a>
+    </nav>
+</header>
+
+<div class="order-container">
+
+    <div class="category-buttons">
+        <a href="ordercake.html">Cakes</a>
+        <a href="orderdrinks.html">Drinks</a>
+        <a href="custom.html">Custom</a>
+    </div>
+
+    <!-- PRODUCTS -->
+    <div class="product-grid">
+
+        <div class="product-card">
+            <img src="cake.jpeg">
+            <h3>Strawberry Cake</h3>
+			<h3><small>₱300.00</small></h3>
+            <button onclick="addToCart('Strawberry Cake', 300)">Add to order</button>
+        </div>
+
+        <div class="product-card">
+            <img src="coffee1.webp">
+            <h3>Coffee Cake</h3>
+			<h3><small>₱350.00</small></h3>
+            <button onclick="addToCart('Coffee Cake', 350)">Add to order</button>
+        </div>
+
+        <div class="product-card">
+            <img src="cnc.jpg">
+            <h3>Cookies n Cream</h3>
+			<h3><small>₱500.00</small></h3>
+            <button onclick="addToCart('Cookies n Cream Cake', 500)">Add to order</button>
+        </div>
+
+        <div class="product-card">
+            <img src="mangograham.jpg">
+            <h3>Mango Graham Cake</h3>
+			<h3><small>₱250.00</small></h3>
+            <button onclick="addToCart('Mango Graham Cake', 250)">Add to order</button>
+        </div>
+
+        <div class="product-card">
+            <img src="ube.webp">
+            <h3>Ube Cake</h3>
+			<h3><small>₱350.00</small></h3>
+            <button onclick="addToCart('Ube Cake', 350)">Add to order</button>
+        </div>
+
+        <div class="product-card">
+            <img src="customized2.jpg">
+            <h3>Customize your cake!</h3>
+			<h3><small>Small - ₱500.00</small></h3>
+			<h3><small>Medium - ₱1,000.00</small></h3>
+			<h3><small>Large - ₱2,000.00</small></h3>
+			<br>
+            <p>Design your own cake exactly how you want it.</p>
+			<br>
+            <a href="custom.html" class="btn btn-dark">Customize Now</a>
+        </div>
+
+    </div>
+
+    <!-- CART -->
+    <div class="order-summary">
+
+        <div class="order-table">
+            <h3>Your Order</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="orderTable"></tbody>
+
+                <tfoot>
+                    <tr class="total-row">
+                        <td><strong>Total</strong></td>
+                        <td></td>
+                        <td><strong>₱<span id="totalPrice">0</span></strong></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+
+            </table>
+        </div>
+
+    </div>
+
+    <div class="checkout">
+        <a href="payment.html" class="btn btn-dark">Checkout</a>
+    </div>
+
+</div>
+
+<footer>
+    <img src="CABRITOSCAKEHOUSE2.png">
+    <p>© 2020 Cabrito's Cake House. All Rights Reserved.</p>
+</footer>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || {};
+renderCart();
+
+function addToCart(name, price){
+    if(cart[name]){
+        cart[name].quantity++;
+    } else {
+        cart[name] = { price, quantity: 1 };
+    }
+    renderCart();
+}
+
+function increaseQty(name){
+    cart[name].quantity++;
+    renderCart();
+}
+
+function decreaseQty(name){
+    cart[name].quantity--;
+    if(cart[name].quantity <= 0){
+        delete cart[name];
+    }
+    renderCart();
+}
+
+function removeItem(name){
+    delete cart[name];
+    renderCart();
+}
+
+function renderCart(){
+    const table = document.getElementById("orderTable");
+    const total = document.getElementById("totalPrice");
+
+    table.innerHTML = "";
+
+    let totalPrice = 0;
+
+    for(let item in cart){
+
+        let product = cart[item];
+        let itemTotal = product.price * product.quantity;
+
+        let row = `
+            <tr>
+                <td>${item}</td>
+
+                <td>${product.quantity}</td>
+
+                <td>₱${itemTotal}</td>
+
+                <td>
+                    <div class="action-buttons">
+                        <button onclick="decreaseQty('${item}')">−</button>
+                        <button onclick="increaseQty('${item}')">+</button>
+                        <button onclick="removeItem('${item}')">Remove</button>
+                    </div>
+                </td>
+            </tr>
+        `;
+
+        table.innerHTML += row;
+        totalPrice += itemTotal;
+    }
+
+    total.textContent = totalPrice;
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+</script>
+
+</body>
+</html>
