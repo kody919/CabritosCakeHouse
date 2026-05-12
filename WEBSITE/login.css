@@ -204,6 +204,24 @@ font-size:28px;
 margin-bottom:20px;
 }
 
+.login-page{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 60px 20px;
+    flex-wrap: wrap;
+}
+
+.demo-box{
+    width: 320px;
+    padding: 25px;
+    border: 2px dashed #d4a373;
+    border-radius: 15px;
+    background: #fff8f0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
 /* FOOTER */
 footer{
 display:flex;
